@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Score Calculator</title>
+    <script>
+        function calculateDelta() {
+            // Get values from the sliders
+            const S = parseFloat(document.getElementById("sugar").value);
+            const Fi = parseFloat(document.getElementById("fiber").value);
+            const L = parseFloat(document.getElementById("micronutrientDensity").value);
+            const I = parseFloat(document.getElementById("ingredientQuality").value);
+            const N = parseFloat(document.getElementById("sodium").value);
+            const P = parseFloat(document.getElementById("protein").value);
+            const K = parseFloat(document.getElementById("calories").value);
+            const C = parseFloat(document.getElementById("carbohydrates").value);
+            const Fa = parseFloat(document.getElementById("fat").value);
+
+            // Perform the calculation
+            const part1 = 1.4 * Math.exp(-0.2 * S);
+            const part2 = (2 * Fi) + (3 * L) + (2 * I) + ((-2.8 * Math.exp(0.3 * N) + 4) * P);
+            const part3 = (P / 17) * (((168.81 * Math.exp(-0.00109726 * K) - 52.7811) * (60.61 * Math.exp(-0.0185 * C) - 10.775)) / 77);
+            const part4 = 1.75 * ((I / 5) * (Fa / 7));
+            const delta = part1 * (part2 + part3 + part4);
+
+            // Update the result on the page
+            document.getElementById("result").textContent = "The food score is: " + delta.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <h1>Food Score Calculator</h1>
+    
+    <label for="sugar">Sugar (grams): </label>
+    <input type="range" id="sugar" name="sugar" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    
+    <label for="fiber">Fiber (grams): </label>
+    <input type="range" id="fiber" name="fiber" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    
+    <label for="micronutrientDensity">Micronutrient Density (1-10): </label>
+    <input type="range" id="micronutrientDensity" name="micronutrientDensity" min="1" max="10" step="1" oninput="calculateDelta()"><br>
+    
+    <label for="ingredientQuality">Ingredient Quality (1-10): </label>
+    <input type="range" id="ingredientQuality" name="ingredientQuality" min="1" max="10" step="1" oninput="calculateDelta()"><br>
+    
+    <label for="sodium">Sodium (grams): </label>
+    <input type="range" id="sodium" name="sodium" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    
+    <label for="protein">Protein (grams): </label>
+    <input type="range" id="protein" name="protein" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    
+    <label for="calories">Calories: </label>
+    <input type="range" id="calories" name="calories" min="0" max="1000" step="10" oninput="calculateDelta()"><br>
+    
+    <label for="carbohydrates">Carbohydrates (grams): </label>
+    <input type="range" id="carbohydrates" name="carbohydrates" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    
+    <label for="fat">Fat (grams): </label>
+    <input type="range" id="fat" name="fat" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    
+    <button onclick="calculateDelta()">Calculate Food Score</button>
+    
+    <p id="result">The food score is: </p>
+</body>
+</html>
+
