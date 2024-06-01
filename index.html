@@ -26,42 +26,66 @@
 
             // Update the result on the page
             document.getElementById("result").textContent = "The food score is: " + delta.toFixed(2);
+
+            // Update the values next to the sliders
+            document.getElementById("sugarValue").value = S;
+            document.getElementById("fiberValue").value = Fi;
+            document.getElementById("micronutrientDensityValue").value = L;
+            document.getElementById("ingredientQualityValue").value = I;
+            document.getElementById("sodiumValue").value = N;
+            document.getElementById("proteinValue").value = P;
+            document.getElementById("caloriesValue").value = K;
+            document.getElementById("carbohydratesValue").value = C;
+            document.getElementById("fatValue").value = Fa;
+        }
+
+        function updateSlider(id, value) {
+            document.getElementById(id).value = value;
+            calculateDelta();
         }
     </script>
 </head>
-<body>
+<body onload="calculateDelta()">
     <h1>Food Score Calculator</h1>
     
     <label for="sugar">Sugar (grams): </label>
-    <input type="range" id="sugar" name="sugar" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    <input type="range" id="sugar" name="sugar" min="0" max="100" step="1" oninput="calculateDelta()">
+    <input type="number" id="sugarValue" min="0" max="100" step="1" oninput="updateSlider('sugar', this.value)"><br>
     
     <label for="fiber">Fiber (grams): </label>
-    <input type="range" id="fiber" name="fiber" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    <input type="range" id="fiber" name="fiber" min="0" max="100" step="1" oninput="calculateDelta()">
+    <input type="number" id="fiberValue" min="0" max="100" step="1" oninput="updateSlider('fiber', this.value)"><br>
     
     <label for="micronutrientDensity">Micronutrient Density (1-10): </label>
-    <input type="range" id="micronutrientDensity" name="micronutrientDensity" min="1" max="10" step="1" oninput="calculateDelta()"><br>
+    <input type="range" id="micronutrientDensity" name="micronutrientDensity" min="1" max="10" step="1" oninput="calculateDelta()">
+    <input type="number" id="micronutrientDensityValue" min="1" max="10" step="1" oninput="updateSlider('micronutrientDensity', this.value)"><br>
     
     <label for="ingredientQuality">Ingredient Quality (1-10): </label>
-    <input type="range" id="ingredientQuality" name="ingredientQuality" min="1" max="10" step="1" oninput="calculateDelta()"><br>
+    <input type="range" id="ingredientQuality" name="ingredientQuality" min="1" max="10" step="1" oninput="calculateDelta()">
+    <input type="number" id="ingredientQualityValue" min="1" max="10" step="1" oninput="updateSlider('ingredientQuality', this.value)"><br>
     
     <label for="sodium">Sodium (grams): </label>
-    <input type="range" id="sodium" name="sodium" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    <input type="range" id="sodium" name="sodium" min="0" max="100" step="1" oninput="calculateDelta()">
+    <input type="number" id="sodiumValue" min="0" max="100" step="1" oninput="updateSlider('sodium', this.value)"><br>
     
     <label for="protein">Protein (grams): </label>
-    <input type="range" id="protein" name="protein" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    <input type="range" id="protein" name="protein" min="0" max="100" step="1" oninput="calculateDelta()">
+    <input type="number" id="proteinValue" min="0" max="100" step="1" oninput="updateSlider('protein', this.value)"><br>
     
     <label for="calories">Calories: </label>
-    <input type="range" id="calories" name="calories" min="0" max="1000" step="10" oninput="calculateDelta()"><br>
+    <input type="range" id="calories" name="calories" min="0" max="1000" step="10" oninput="calculateDelta()">
+    <input type="number" id="caloriesValue" min="0" max="1000" step="10" oninput="updateSlider('calories', this.value)"><br>
     
     <label for="carbohydrates">Carbohydrates (grams): </label>
-    <input type="range" id="carbohydrates" name="carbohydrates" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    <input type="range" id="carbohydrates" name="carbohydrates" min="0" max="100" step="1" oninput="calculateDelta()">
+    <input type="number" id="carbohydratesValue" min="0" max="100" step="1" oninput="updateSlider('carbohydrates', this.value)"><br>
     
     <label for="fat">Fat (grams): </label>
-    <input type="range" id="fat" name="fat" min="0" max="100" step="1" oninput="calculateDelta()"><br>
+    <input type="range" id="fat" name="fat" min="0" max="100" step="1" oninput="calculateDelta()">
+    <input type="number" id="fatValue" min="0" max="100" step="1" oninput="updateSlider('fat', this.value)"><br>
     
     <button onclick="calculateDelta()">Calculate Food Score</button>
     
     <p id="result">The food score is: </p>
 </body>
 </html>
-
