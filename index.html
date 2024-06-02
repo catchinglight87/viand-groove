@@ -18,7 +18,7 @@
             const Fa = parseFloat(document.getElementById("fat").value);
 
             // Perform the calculation
-            const part1 = 1.4 * Math.exp(-0.2 * S);
+            const part1 = 1.1 * Math.exp(-0.2 * S);
             const part2 = (2 * Fi) + (3 * L) + (2 * I) + ((-2.8 * Math.exp(0.3 * N) + 4) * P);
             const part3 = (P / 17) * (((168.81 * Math.exp(-0.00109726 * K) - 52.7811) * (60.61 * Math.exp(-0.0185 * C) - 10.775)) / 77);
             const part4 = 1.75 * ((I / 5) * (Fa / 7));
@@ -65,7 +65,7 @@
     <input type="number" id="ingredientQualityValue" min="1" max="10" step="1" oninput="updateSlider('ingredientQuality', this.value)"><br>
     
     <label for="sodium">Sodium (grams): </label>
-    <input type="range" id="sodium" name="sodium" min="0" max="100" step="1" oninput="calculateDelta()">
+    <input type="range" id="sodium" name="sodium" min="0" max="2" step="0.01" oninput="calculateDelta()">
     <input type="number" id="sodiumValue" min="0" max="100" step="1" oninput="updateSlider('sodium', this.value)"><br>
     
     <label for="protein">Protein (grams): </label>
