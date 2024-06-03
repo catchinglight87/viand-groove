@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Score Calculator</title>
+    <script>
+        function calculatePhi() {
+            // Get values from the sliders
+            const P = parseFloat(document.getElementById("protein").value);
+            const f = parseFloat(document.getElementById("fiber").value);
+            const F = parseFloat(document.getElementById("fat").value);
+            const I = parseFloat(document.getElementById("ingredientQuality").value);
+            const L = parseFloat(document.getElementById("micronutrientDensity").value);
+            const S = parseFloat(document.getElementById("sugar").value);
+            const C = parseFloat(document.getElementById("carbohydrates").value);
+            const K = parseFloat(document.getElementById("calories").value);
+            const N = parseFloat(document.getElementById("sodium").value);
+
+            // Perform the calculation
+            const term1 = 1.5 * (0.1 * Math.exp(0.1 * P) + 1.5 * P + 3);
+            const term2 = 2 * f;
+            const term3 = 3 * F;
+            const term4 = 3 * I;
+            const term5 = 5 + L + 7;
+            const term6 = (40 - Math.exp(S - 40) - 0.8 * S);
+            const term7 = 1.2 * (2.1175e-20 * Math.pow(C - 186.406, 10) - 6.4266e-10 * Math.pow(C - 108.913, 6));
+            const term8 = 1.3 * (-0.0000661376 * Math.pow(K - 589, 2) + 32.8982);
+            const term9 = (-0.000047619 * Math.pow(N - 465, 2) + 16.1536);
+            const phi = term1 + term2 + term3 + term4 + term5 + term6 + term7 + term8 + term9;
+
+            // Update the result on the page
+            document.getElementById("result").textContent = "The food score is: " + phi.toFixed(2);
+
+            // Update the values next to the sliders
+            document.getElementById("proteinValue").value = P;
+            document.getElementById("fiberValue").value = f;
+            document.getElementById("fatValue").value = F;
+            document.getElementById("ingredientQualityValue").value = I;
+            document.getElementById("micronutrientDensityValue").value = L;
+            document.getElementById("sugarValue").value = S;
+            document.getElementById("carbohydratesValue").value = C;
+            document.getElementById("caloriesValue").value = K;
+            document.getElementById("sodiumValue").value = N;
+        }
+
+        function updateSlider(id, value) {
+            document.getElementById(id).value = value;
+            calculatePhi();
+        }
+    </script>
+</head>
+<body onload="calculatePhi()">
+    <h1>Food Score Calculator</h1>
+    
+    <label for="protein">Protein (grams): </label>
+    <input type="range" id="protein" name="protein" min="0" max="100" step="1" oninput="calculatePhi()">
+    <input type="number" id="proteinValue" min="0" max="100" step="1" oninput="updateSlider('protein', this.value)"><br>
+    
+    <label for="fiber">Fiber (grams): </label>
+    <input type="range" id="fiber" name="fiber" min="0" max="100" step="1" oninput="calculatePhi()">
+    <input type="number" id="fiberValue" min="0" max="100" step="1" oninput="updateSlider('fiber', this.value)"><br>
+    
+    <label for="fat">Fat (grams): </label>
+    <input type="range" id="fat" name="fat" min="0" max="100" step="1" oninput="calculatePhi()">
+    <input type="number" id="fatValue" min="0" max="100" step="1" oninput="updateSlider('fat', this.value)"><br>
+    
+    <label for="ingredientQuality">Ingredient Quality (1-10): </label>
+    <input type="range" id="ingredientQuality" name="ingredientQuality" min="1" max="10" step="1" oninput="calculatePhi()">
+    <input type="number" id="ingredientQualityValue" min="1" max="10" step="1" oninput="updateSlider('ingredientQuality', this.value)"><br>
+    
+    <label for="micronutrientDensity">Micronutrient Density (1-10): </label>
+    <input type="range" id="micronutrientDensity" name="micronutrientDensity" min="1" max="10" step="1" oninput="calculatePhi()">
+    <input type="number" id="micronutrientDensityValue" min="1" max="10" step="1" oninput="updateSlider('micronutrientDensity', this.value)"><br>
+    
+    <label for="sugar">Sugar (grams): </label>
+    <input type="range" id="sugar" name="sugar" min="0" max="100" step="1" oninput="calculatePhi()">
+    <input type="number" id="sugarValue" min="0" max="100" step="1" oninput="updateSlider('sugar', this.value)"><br>
+    
+    <label for="carbohydrates">Carbohydrates (grams): </label>
+    <input type="range" id="carbohydrates" name="carbohydrates" min="0" max="100" step="1" oninput="calculatePhi()">
+    <input type="number" id="carbohydratesValue" min="0" max="100" step="1" oninput="updateSlider('carbohydrates', this.value)"><br>
+    
+    <label for="calories">Calories: </label>
+    <input type="range" id="calories" name="calories" min="0" max="1000" step="10" oninput="calculatePhi()">
+    <input type="number" id="caloriesValue" min="0" max="1000" step="10" oninput="updateSlider('calories', this.value)"><br>
+    
+    <label for="sodium">Sodium (grams): </label>
+    <input type="range" id="sodium" name="sodium" min="0" max="100" step="1" oninput="calculatePhi()">
+    <input type="number" id="sodiumValue" min="0" max="100" step="1" oninput="updateSlider('sodium', this.value)"><br>
+    
+    <button onclick="calculatePhi()">Calculate Food Score</button>
+    
+    <p id="result">The food score is: </p>
+  
+    <a href="index.html">back to home page</a>
+
+</body>
+</html>
